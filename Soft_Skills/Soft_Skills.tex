@@ -1,0 +1,165 @@
+\documentclass
+[   twoside=false,     % Einseitiger oder zweiseitiger Druck?
+    fontsize=12pt,     % Bezug: 12-Punkt Schriftgröße
+    DIV=15,            % Randaufteilung, siehe Dokumentation "KOMA"-Script
+    BCOR=17mm,         % Bindekorrektur: Innen 17mm Platz lassen. Copyshop-getestet.
+%    headsepline,
+    headsepline,  % Unter Kopfzeile Trennlinie (aus: headnosepline)
+    footsepline,  % Über Fußzeile Trennlinie (aus: footnosepline)
+    open=right,        % Neue Kapitel im zweiseitigen Druck rechts beginnen lassen
+    paper=a4,          % Seitenformat A4
+    abstract=true,     % Abstract einbinden
+    listof=totoc,      % Div. Verzeichnisse ins Inhaltsverzeichnis aufnehmen
+    bibliography=totoc,% Literaturverzeichnis ins Inhaltsverzeichnis aufnehmen
+    titlepage,         % Titelseite aktivieren
+    headinclude=true,  % Seiten-Head in die Satzspiegelberechnung mit einbeziehen
+    footinclude=false, % Seiten-Foot nicht in die Satzspiegelberechnung mit einbeziehen
+    numbers=noenddot   % Gliederungsnummern ohne abschließenden Punkt darstellen
+]   {scrreprt}         % Dokumentenstil: "Report" aus dem KOMA-Skript-Paket
+\usepackage{float}
+\usepackage{play}
+\usepackage[active]{srcltx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{longtable}
+\usepackage{subfigure}  	
+%\usepackage[activate=normal]{pdfcprot} % Optischer Randausgleich -> pdflatex!
+\usepackage{ifthen}
+\usepackage[ngerman]{babel}   % Neue Deutsche Rechtschreibung
+%\usepackage[latin1]{inputenc} % Zeichencodierung nach ISO-8859-1
+\usepackage[utf8]{inputenc}   %	Zeichencodierung nach UTF-8 (Unicode)
+\usepackage[T1]{fontenc}
+%\usepackage{ae} % obsolet und durch lmodern ersetzt
+\usepackage{lmodern}
+\usepackage[T1]{url}
+\usepackage[final]{graphicx}
+\RequirePackage{scrlfile}
+\ReplacePackage{scrpage2}{scrlayer-scrpage}
+% old: \usepackage[automark]{scrpage2}
+\usepackage[automark]{scrlayer-scrpage}
+\usepackage{setspace}
+\usepackage{cite}
+%\usepackage[first,light]{draftcopy} % Für Probedruck
+\usepackage[plainpages=false,pdfpagelabels,hypertexnames=false]{hyperref}
+
+% Tiefe der Kapitelnummerierung beeinflussen
+\setcounter{secnumdepth}{3} % Tiefe der Nummerierung
+\setcounter{tocdepth}{3}    % Tiefe des Inhaltsverzeichnisses
+
+% Hier in die zweite geschweifte Klammer jeweils
+% die persönlichen Daten und das Thema der Arbeit eintragen:
+\newcommand{\artderausarbeitung}{Reflexionsbericht zum Modul Soft Skills }
+\newcommand{\namedesautors}{Jonathan Skopp}
+\newcommand{\themaderarbeit}{Kommunikative Kompetenzen im Studium Generale}
+
+% PDF Metadaten definieren
+\hypersetup{
+   pdftitle={\themaderarbeit},
+   pdfsubject={\artderausarbeitung},
+   pdfauthor={\namedesautors},
+   pdfkeywords={\artderausarbeitung; TU-Ilmenau;Reflexionsbericht zum Modul Soft Skills ;}}
+
+
+% Abkürzungsverzeichnis beeinflussen. Hier nichts ändern!
+\usepackage[intoc]{nomencl}
+  \AtBeginDocument{\setlength{\nomlabelwidth}{.25\columnwidth}}
+  \let\abbrev\nomenclature
+  \renewcommand{\nomname}{Abkürzungsverzeichnis}
+  \renewcommand{\nomlabel}[1]{#1 \dotfill}
+  \setlength{\nomitemsep}{-\parsep}
+  \makenomenclature
+
+\usepackage[normalem]{ulem}
+  \newcommand{\markup}[1]{\textbf{#1}}
+
+% Seitenlayout festlegen. Hier nichts ändern!
+\pagestyle{scrplain}
+\ihead[]{\headmark}
+\ohead[]{\pagemark}
+\chead[]{}
+\ifoot[]{}
+\ofoot[]{\scriptsize \artderausarbeitung\ \namedesautors}
+\cfoot[]{}
+\renewcommand{\titlepagestyle}{scrheadings}
+\renewcommand{\partpagestyle}{scrheadings}
+\renewcommand{\chapterpagestyle}{scrheadings}
+\renewcommand{\indexpagestyle}{scrheadings}
+
+% Abschnittsweise Nummerierung anstatt fortlaufend. Hier nichts ändern!
+\makeatletter
+\@addtoreset{equation}{chapter}
+\@addtoreset{figure}{chapter}
+\@addtoreset{table}{chapter}
+\renewcommand\theequation{\thechapter.\@arabic\c@equation}
+\renewcommand\thefigure{\thechapter.\@arabic\c@figure}
+\renewcommand\thetable{\thechapter.\@arabic\c@table}
+\makeatother
+
+% Quelltextrahmen, klein. Hier nichts ändern!
+\newsavebox{\inhaltkl}
+\def\rahmenkl{\sbox{\inhaltkl}\bgroup\small\renewcommand{\baselinestretch}{1}\vbox\bgroup\hsize\textwidth}
+\def\endrahmenkl{\par\vskip-\lastskip\egroup\egroup\fboxsep3mm%
+\framebox[\textwidth][l]{\usebox{\inhaltkl}}}
+
+% Quelltextrahmen, normale Groesse. Hier nichts ändern!
+\newsavebox{\inhalt}
+\def\rahmen{\sbox{\inhalt}\bgroup\renewcommand{\baselinestretch}{1}\vbox\bgroup\hsize\textwidth}
+\def\endrahmen{\par\vskip-\lastskip\egroup\egroup\fboxsep3mm%
+\framebox[\textwidth][l]{\usebox{\inhalt}}}
+
+% Trennvorschläge für falsch getrennte Wörter.
+% Wird häufig bei eingedeutschen Wörtern benötigt, da LaTeX hierbei
+% gerne falsch trennt. Alternativ kann auch im Fliesstext ein
+% Trennvorschlag per "\-" hinterlegt werden, bspw.:
+% Die Hard\-ware besteht aus A und B.
+\hyphenation{
+Hard-ware
+}
+
+% Sonstige Befehlsdefinitionen hier ablegen.
+\newcommand{\entspricht}{\stackrel{\wedge}{=}}
+
+% Tabellenspaltendefinitionen mit fester Breite --> somit Zeilenumbruch innerhalb einer Zelle möglich
+% aus http://www.torsten-schuetze.de/tex/tabsatz-2004.pdf
+\usepackage{array, booktabs}
+\newcolumntype{f}{>{$}l<{$}}
+\newcolumntype{n}{>{\raggedright}l}
+\newcolumntype{N}{>{\scriptsize}l}
+\newcolumntype{v}[1]{>{\raggedright\hspace{0pt}}m{#1}}
+\newcolumntype{V}[1]{>{\scriptsize\raggedright\hspace{0pt}}m{#1}}
+\newcolumntype{Z}[1]{>{\raggedright\centering}m{#1}}
+\newcolumntype{k}[1]{>{\raggedright}p{#1}}
+% ergibt Tabllenspalte fester Breite, linksbündig
+% Umbruch innerhalb der Zelle mit \\, neue Tabellezeile mit \tabularnewline
+% \addlinespace für Gruppentrennung (aus \texttt{booktabs.sty})
+
+
+\begin{document}
+\onehalfspacing
+\input{titelblatt.tex}
+
+
+% Inhaltsverzeichnis
+\cleardoublepage % Seitenumbruch erzwingen vor Änderung des Nummerierungsstils
+\pagenumbering{roman} % Nummerierung der Seiten ab hier: i, ii, iii, iv...
+\pagestyle{scrheadings} % Ab hier mit Kopf- und Fusszeile
+\tableofcontents
+
+% Die einzelnen Kapitel
+\cleardoublepage % Seitenumbruch erzwingen vor Änderung des Nummerierungsstils
+\pagenumbering{arabic} % Nummerierung der Seiten ab hier: 1, 2, 3, 4...
+
+%% Content
+\input{Vorwissen.tex}
+\input{Gelernt.tex}
+\input{Mitgenommen.tex}
+
+%% End Content
+\appendix
+\part*{Anhang}
+
+% Literaturverzeichnis einbinden
+\input{anhang_literaturverzeichnis.tex}
+
+% Abschlusserklärung
+\input{abschlusserklaerung.tex}
+\end{document}

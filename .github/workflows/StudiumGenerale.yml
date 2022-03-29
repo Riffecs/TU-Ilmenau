@@ -1,0 +1,44 @@
+name: Build Studium Generale
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: ./Studium_Generale/Utopie_und_Dystopie.tex
+
+      - name: Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: ./Utopie_und_Dystopie.pdf
+    
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Upload Server
+        run: |
+          python upload.py ./Utopie_und_Dystopie.pdf ./StudiumGenerale
+        env:
+          key: ${{ secrets.FTPPWD }}
+          user: ${{ secrets.FTPUSER }}
+          server: ${{ secrets.SERVER }}
+
+      - name: Clean GitHub
+        run: |
+          git clean -fX

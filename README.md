@@ -1,2 +1,0 @@
-# TU-Ilmenau
-TU Ilmenau
