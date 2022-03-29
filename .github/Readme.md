@@ -1,5 +1,3 @@
-[![Build Studium Generale](https://github.com/Riffecx/TU-Ilmenau/actions/workflows/StudiumGenerale.yml/badge.svg)](https://github.com/Riffecx/TU-Ilmenau/actions/workflows/StudiumGenerale.yml) [![Build Soft Skills](https://github.com/Riffecx/TU-Ilmenau/actions/workflows/SoftSkills.yml/badge.svg)](https://github.com/Riffecx/TU-Ilmenau/actions/workflows/SoftSkills.yml)
-
 # TU-Ilmenau
 
 Informatik ist die Wissenschaft von der systematischen Verarbeitung von Informationen, insbesondere der automatischen Verarbeitung mit Hilfe von Rechenanlagen. Historisch hat sich die Informatik als Wissenschaft aus der Mathematik entwickelt, während die Entwicklung der ersten Rechenanlagen ihre Ursprünge in der Elektrotechnik und Nachrichtentechnik hat. Dennoch stellen Computer nur ein Werkzeug und Medium der Informatik dar, um die theoretischen Konzepte praktisch umzusetzen.
