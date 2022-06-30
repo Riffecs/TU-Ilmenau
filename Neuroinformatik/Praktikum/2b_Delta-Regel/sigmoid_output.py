@@ -18,4 +18,4 @@
 # ausgewählte Ausgabefunktion
 
 import numpy
-y = 1 / (1+ numpy.exp(-c*z))
+y = 1/(1+numpy.exp(-c*z))
