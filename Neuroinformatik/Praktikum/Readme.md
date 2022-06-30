@@ -32,15 +32,26 @@ pip install -U pip
 - Nachinstallation von Packages
     - [PyQt5](https://pypi.org/project/PyQt5/): ``pip install PyQt5`` (5.15.7)
     - [matplotlib](https://pypi.org/project/matplotlib/): ``pip install matplotlib``(3.5.2)
-    - [cryptography](https://pypi.org/project/cryptography/):``pip install cryptography`` (37.0.2)
+    - [cryptography](https://pypi.org/project/cryptography/): ``pip install cryptography`` (37.0.2)
 
 - Starten des Packages:
  ```shell
-    tui-ni-delta-rule
+tui-ni-delta-rule
  ```
 
 ### Interface
 ![](/Neuroinformatik/Praktikum/2b_Delta-Regel/praktikum.png)
 
 #### Lösung
-##### Teil 1
+##### Sigmoid 
+###### Output Function
+[Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/sigmoid_output.py)
+```python
+import numpy
+y = 1 / (1+ numpy.exp(-c*z))
+```
+###### Output Function Derivate
+[Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/output_function_derivate.py)
+```python
+dy_dz = c*y*(1-y)
+```
