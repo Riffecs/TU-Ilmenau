@@ -16,12 +16,12 @@
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/sigmoid_output.py)
 ```python
 import numpy
-y = 1 / (1+ numpy.exp(-c*z))
+y = 1 / (1 + numpy.exp(-c*z))
 ```
 #### Output Function Derivate
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/sigmoid_output_function_derivate.py)
 ```python
-dy_dz = c*y*(1-y)
+dy_dz = c * y * (1-y)
 ```
 ### RelU  
 #### RelU Output Function
