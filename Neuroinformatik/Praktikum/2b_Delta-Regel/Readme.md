@@ -18,7 +18,7 @@
 import numpy
 y = 1 / (1+ numpy.exp(-c*z))
 ```
-### Output Function Derivate
+#### Output Function Derivate
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/sigmoid_output_function_derivate.py)
 ```python
 dy_dz = c*y*(1-y)
@@ -29,7 +29,7 @@ dy_dz = c*y*(1-y)
 ```python
 y = max(0,z)
 ```
-### RelU Output Function Derivate
+#### RelU Output Function Derivate
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/rel_output_function_derivate.py)
 ```python
 if z < 0:
