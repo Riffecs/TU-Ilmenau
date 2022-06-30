@@ -1,0 +1,274 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "INTERACTIVE",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "environment": [],
+            "preLaunchTask": "BUILD",
+            "linux": {
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true,
+                    },
+                ],
+            },
+            "osx": {
+                "type": "lldb",
+            },
+            "windows": {
+                "type": "cppvsdbg",
+                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "externalConsole": true,
+            },
+        },
+        {
+            "name": "DEBUG sample",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [
+                "<",
+                "${fileDirname}/0-sample.in",
+            ],
+            "cwd": "${fileDirname}",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "environment": [],
+            "preLaunchTask": "BUILD",
+            "linux": {
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true,
+                    },
+                ],
+            },
+            "osx": {
+                "type": "lldb",
+                "args": [],
+                "stdio": [
+                    "${fileDirname}/0-sample.in",
+                    null,
+                    null,
+                ],
+            },
+            "windows": {
+                "type": "cppvsdbg",
+                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            },
+        },
+        {
+            "name": "DEBUG xyz.in",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [
+                "<",
+                "${fileDirname}/${input:pickInFile}.in",
+            ],
+            "cwd": "${fileDirname}",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "environment": [],
+            "preLaunchTask": "BUILD",
+            "linux": {
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true,
+                    },
+                ],
+            },
+            "osx": {
+                "type": "lldb",
+                "args": [],
+                "stdio": [
+                    "${fileDirname}/${input:pickInFile}.in",
+                    null,
+                    null,
+                ],
+            },
+            "windows": {
+                "type": "cppvsdbg",
+                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "args": [
+                    "<",
+                    "${fileDirname}/${input:pickInFileWin}.in",
+                ],
+            },
+        },
+        // {
+        //     "name": "DIFF 0-sample.in",
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "program": "${fileDirname}/${fileBasenameNoExtension}",
+        //     "args": [
+        //         "<",
+        //         "${fileDirname}/0-sample.in",
+        //         ">",
+        //         "${fileDirname}/0-sample.out",
+        //     ],
+        //     "cwd": "${fileDirname}",
+        //     "stopAtEntry": false,
+        //     "externalConsole": false,
+        //     "environment": [],
+        //     "preLaunchTask": "BUILD",
+        //     "postDebugTask": "DIFF 0-sample.in",
+        //     "linux": {
+        //         "MIMode": "gdb",
+        //         "setupCommands": [
+        //             {
+        //                 "description": "Enable pretty-printing for gdb",
+        //                 "text": "-enable-pretty-printing",
+        //                 "ignoreFailures": true,
+        //             },
+        //         ],
+        //     },
+        //     "osx": {
+        //         "type": "lldb",
+        //         "args": [],
+        //         "stdio": [
+        //             "${fileDirname}/0-sample.in",
+        //             "${fileDirname}/0-sample.out",
+        //             null,
+        //         ],
+        //     },
+        //     "windows": {
+        //         "type": "cppvsdbg",
+        //         "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+        //     },
+        // },
+        {
+            "name": "DIFF xyz.in",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "cwd": "${fileDirname}",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "environment": [],
+            "preLaunchTask": "BUILD",
+            "postDebugTask": "DIFF xyz.in",
+            "linux": {
+                "MIMode": "gdb",
+                "args": [
+                    "<",
+                    "${fileDirname}/0-sample.in",
+                    ">",
+                    "/dev/null",
+                ],
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true,
+                    },
+                ],
+            },
+            "osx": {
+                "type": "lldb",
+                "args": [],
+                "stdio": [
+                    "${fileDirname}/0-sample.in",
+                    "/dev/null",
+                    null,
+                ],
+            },
+            "windows": {
+                "type": "cppvsdbg",
+                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "args": [
+                    "<",
+                    "${fileDirname}/0-sample.in",
+                    ">",
+                    "nul",
+                ],
+            },
+        },
+        {
+            "name": "DIFF *.in",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "cwd": "${fileDirname}",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "environment": [],
+            "preLaunchTask": "BUILD",
+            "postDebugTask": "DIFF *.in",
+            "linux": {
+                "MIMode": "gdb",
+                "args": [
+                    "<",
+                    "${fileDirname}/0-sample.in",
+                    ">",
+                    "/dev/null",
+                ],
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true,
+                    },
+                ],
+            },
+            "osx": {
+                "type": "lldb",
+                "stdio": [
+                    "${fileDirname}/0-sample.in",
+                    "/dev/null",
+                    null,
+                ],
+            },
+            "windows": {
+                "type": "cppvsdbg",
+                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "args": [
+                    "<",
+                    "${fileDirname}/0-sample.in",
+                    ">",
+                    "nul",
+                ],
+            },
+        },
+    ],
+    "inputs": [
+        {
+            "id": "pickInFile",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "for filename in *.in; do basename \"$filename\" .in; done",
+                "cwd": "${fileDirName}",
+                "useSingleResult": true,
+            },
+        },
+        {
+            "id": "pickInFileWin",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "@ECHO OFF && for %f in (*.in) do echo %~nf",
+                "cwd": "${fileDirName}",
+                "useSingleResult": true,
+            },
+        },
+    ],
+}
