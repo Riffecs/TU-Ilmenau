@@ -1,6 +1,10 @@
 #include <iostream>
-/* TODO */
+#include "fibonacci.h"
+using namespace std;
 
 int main() {
-    /* TODO */
+    int i;
+    while (cin >> i){
+        cout << fib(i) << endl;
+    }
 }

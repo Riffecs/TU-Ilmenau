@@ -5,11 +5,17 @@
 *****************************************************/
 
 /* zusätzliche Variablen und Datenstrukturen */
-std::vector<int64_t> rout;
-
+/* TODO */
+std::vector<int> stack;
+std::vector<unsigned long long> costs;
+int end_node;
 /* Aktionen direkt vor DFS() */
 void preDFS() {
-    rout.resize(n);
+    /* TODO */
+    stack.resize(0);
+    end_node = n - 1;
+    costs.resize(0);
+    costs.resize(n,0);
 }
 
 /* Präorder-Aktionen an Knoten v bei Entdeckung */
@@ -19,25 +25,28 @@ void dfsVisit(const int v) {
 
 /* Postorder-Aktionen an Knoten v bei Abschluss */
 void finVisit(const int v) {
-    if(v == n-1){
-        rout[v] = 1;
-    }
-    else{
-        int64_t count = 0;
-        for(int i=0; i < G[v].size(); i++){
-            count = count + rout[G[v][i]];
-        }
-        rout[v] = count;
-    }
+    /* TODO */
+    stack.push_back(v);
 }
 
 /* Aktionen direkt nach DFS() */
 void postDFS() {
-    if(B.size() == 0){
-        std::cout << rout[0];
+    /* TODO */
+    if(!B.size()){
+        for (int node : stack){
+            if(node == end_node){
+                costs[node] = 1;
+            }
+            else{
+                for(int neighbour : G[node]){
+                    costs[node] += costs[neighbour];
+                }
+            }
+            if(!node){break;}
+        }
+        std::cout << costs[0] << std::endl;
     }
     else{
-        std::cout << "-";
-        }
-    std::cout << std::endl;
+        std::cout << "-" << std::endl;
+    }
 }

@@ -28,27 +28,19 @@ bool lookup(const Tree* T, const int key) {
      * Tree* T = new Tree{nullptr,2,nullptr}; // T == (-,2,-)
      * bool b = lookup(T, 4); // T == (-,2,-), b == false
      */
-    
-    if(T==nullptr){
+    /* TODO */
+    if (T == nullptr){
         return false;
     }
-
-    if(T->key==key){
+    if (T->key == key){
         return true;
     }
-
-    if(T->key > key){
-        bool b = lookup(T->left, key);
-        return b;
+    if (T->key < key){
+        return lookup(T->right,key);
     }
-
-    if(T->key < key){
-        bool b = lookup(T->right, key);
-        return b;
+    else{
+        return lookup(T->left,key);
     }
-
-    return false;
-
 }
 
 Tree* insert(Tree* T, const int key) {
@@ -58,26 +50,22 @@ Tree* insert(Tree* T, const int key) {
      * T = insert(T, 2);  // T == (-,2,-)
      * T = insert(T, 4);  // T == (-,2,(-,4,-))
      */
-    if(T==nullptr){
-        Tree* T = new Tree{nullptr,key,nullptr};
+    /* TODO */
+    if (T == nullptr){
+        Tree *new_T = new Tree{nullptr,key,nullptr};
+        return new_T;
+    }
+    if (T->key == key){
         return T;
     }
-
-    if(T->key == key){
+    if (T->key < key){
+        T->right = insert(T->right,key);
         return T;
     }
-
-    if(T->key > key){
-        T->left = insert(T->left, key);
+    else{
+        T->left =  insert(T->left,key);
         return T;
     }
-
-    if(T->key < key){
-        T->right = insert(T->right, key);
-        return T;
-    }
-
-    return nullptr;
 }
 
 Tree* extractMin(Tree* T, int& minKey) {
@@ -87,21 +75,24 @@ Tree* extractMin(Tree* T, int& minKey) {
      * int k; // k == undefiniert
      * T = extractMin(T, k); // T == (-,4,-), k == 2
      */
-    if(T->left == nullptr){
-    minKey = T->key;
-    Tree* temp = T->right;
-    T->right = nullptr;
-    delete T;
-    return temp; 
+    /* TODO */
+    if (T == nullptr){
+        minKey = -1;
+        return T;
     }
-
-    if(T->left != nullptr){
-
-    T->left = extractMin(T->left, minKey);
-    return T;
+    // Wenn es einen linken Weg gibt, dann Folge ihm
+    if (T->left != nullptr){
+        T->left = extractMin(T->left,minKey);
+        return T;
     }
-
-    return nullptr;
+    // Gibt es keinem linken Weg, dann ist das minimale Element gefunden
+    else{
+        minKey = T->key;
+        Tree *new_T = T->right;
+        T->right = nullptr;
+        delete T;
+        return new_T;
+    }
 }
 
 Tree* erase(Tree* T, const int key) {
@@ -110,88 +101,71 @@ Tree* erase(Tree* T, const int key) {
      * Tree* T = new Tree{nullptr,2,new Tree{nullptr,4,nullptr}}; // T == (-,2,(-,4,-))
      * T = erase(T, 4); // T == (-,2,-)
      */
-    if(T == nullptr){
+    /* TODO */
+    if (T == nullptr){
+        return T;
+    }
+    // Wenn der gesuchte Schlüssel größer ist als der aktuelle, dann suche im rechten Unterbaum weiter
+    if (T->key < key){
+        T->right = erase(T->right,key);
+        return T;
+    }
+    // Wenn der gesuchte Schlüssel kleiner ist als der aktuelle, dann suche im linken Unterbaum weiter
+    if (T->key > key){
+        T->left = erase(T->left,key);
         return T;
     }
 
-    if(T->key < key){
-        T->right = erase(T->right, key);
-        return T;
-    }
-
-    if(T->key > key){
-        T->left = erase(T->left, key);
-        return T; 
-
-
-    }
-
-    if(T->key == key){
-        if(T->right == nullptr && T->left == nullptr){
-            delete T;
-            return nullptr;
+    if (T->key == key){
+        // Hat der gefundene Schlüssel zwei nichtleere Unterbäume, so tausche den Schlüssel mit dem durch exractMin im rechten Unterbaum gefundenen Schlüssel
+        if (T->left != nullptr && T->right != nullptr){
+            int min = 0;
+            T->right = extractMin(T->right,min);
+            T->key = min;
+            return T;
         }
-
-        if(T->left == nullptr && T->right != nullptr){
-            Tree* temp = T->right;
-            T->right = nullptr;
-            delete T;
-            return temp;
-        }
-
-        if(T->right == nullptr && T->left != nullptr){
-            Tree* temp = T->left;
+        // Hat der gefundene Schlüssel nur einen linken Unterbaum, so kann der einfach an den Elternknoten gehängt werden
+        if (T->left != nullptr){
+            Tree *new_T = T->left;
             T->left = nullptr;
             delete T;
-            return temp;
+            return new_T;
         }
-
-        if(T->right != nullptr && T->left != nullptr){
-            int r = 0;
-            T->right = extractMin(T->right, r);
-            T->key = r;
-            return T; 
+        // Hat der gefundene Schlüssel nur einen rechten oder einen leeren Unterbaum, so kann der einfach an den Elternknoten gehängt werden
+        else{
+            Tree *new_T = T->right;
+            T->right = nullptr;
+            delete T;
+            return new_T;
         }
-
-
-
     }
-
-    return T;
 }
 
 int main() {
     char c; int key;
     Tree* T = nullptr;
-    bool d = true; 
-
+    bool out_flag = true;
     while(std::cin >> c >> key) {
-        
-        if(c=='l'){
-            bool b = lookup(T, key);
-            std::cout << b << std::endl;
+        /* TODO */
+        if (c == 'i'){
+            T = insert(T,key);
+           if(out_flag){std::cout << T << std::endl;}
         }
-
-        if(c=='i'){
-            T = insert(T, key);
-            if(d){ std::cout << T << std::endl; }
+        if(c == 'l'){
+            std::cout << lookup(T,key) << std::endl;
         }
-
         if(c == 'e'){
-            T = extractMin(T, key);
-            if(d){ std::cout << T << std::endl; }
+            int min = 0; 
+            T = extractMin(T,min);
+            if(out_flag){std::cout << min << " " << T << std::endl;}
         }
         if(c == 'd'){
-            T = erase(T, key);
-            if(d){ std::cout << T << std::endl; }
+            T = erase(T,key);
+            if(out_flag){std::cout << T << std::endl;}
         }
+        // Ausgabe wird aktiviert oder deaktiviert
         if(c == 'p'){
-            if(key == 0){
-            d = false;
-            }
-            if(key != 0){
-            d = true;
-            }
+            key == 0 ? out_flag = false : out_flag = true;
         }
     }
     delete T; T = nullptr;

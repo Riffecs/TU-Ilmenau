@@ -4,7 +4,12 @@
 
 int maxsum(const std::vector<int>& A) {
     int best = 0;
-    /* TODO */
+    int temp = 0;
+    for (int e:A){
+        if(temp + e > 0){temp += e;}
+        else{temp = 0;}
+        if(temp > best){best = temp;} 
+    }
     return best;
 }
 

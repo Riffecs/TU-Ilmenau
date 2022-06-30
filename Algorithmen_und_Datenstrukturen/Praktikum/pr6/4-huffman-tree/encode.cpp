@@ -48,43 +48,7 @@ std::vector<bool> mark;             // Markierungs-Array: false = 0 = links, tru
  *     d.h., der in den Tabellen p/pred/mark am weitesten vorne/links steht.
  */
 void huffman() {
-    int i;
-    int j;
-
-    p.resize(2*n - 1);
-    pred.resize(2*n -2);
-    mark.resize(2*n -2);
-    pred[0] = n;
-    pred[1] = n;
-    mark[0] = 0;
-    mark[1] = 1;
-    p[n] = p[0] + p[1];
-    int k = 2;
-    int h = n; 
-
-    for(int b = n+1; b < 2*n-1; b++){
-        if(k< n && p[k]<= p[h]){
-            i = k;
-            k++;
-        }
-        else{
-            i = h;
-            h++;
-        }
-        if(k<n && (h==b || p[k]<= p[h])){
-            j = k;
-            k++;
-        }
-        else{
-            j = h;
-            h++;
-        }
-        pred[i] = b;
-        pred[j] = b;
-        mark[i] = 0;
-        mark[j] = 1; 
-        p[b] = p[i] + p[j];
-    }
+    /* TODO */
 }
 
 /*
@@ -100,36 +64,7 @@ void huffman() {
  * treeNodes[nodes-1] ist dann ein Zeiger auf die Wurzel des Codierungsbaums.
  */
 Tree* computeTree() { // iterativ
-    
-    std::vector<Tree*>leaf;
-
-    leaf.resize(2*n-1);
-
-    for(int i = 0; i < leaf.size(); i++){
-        leaf[i] = new Tree(nullptr, '-', nullptr);
-    }
-
-
-    for(int i = 0; i < n; i++){
-        leaf[i]->letter= label[i];
-        if(mark[i] == 0 ){
-            leaf[pred[i]]->left = leaf[i];
-        }
-        else{
-            leaf[pred[i]]->right = leaf[i];
-        }
-
-    }
-    for(int i = n; i < 2*n-2; i++){
-        if(mark[i] == 0 ){
-            leaf[pred[i]]->left = leaf[i];
-        }
-        else{
-            leaf[pred[i]]->right = leaf[i];
-        }
-    }
-
-    return leaf[2*n-2];
+    /* TODO */
 }
 
 /*
@@ -139,17 +74,8 @@ Tree* computeTree() { // iterativ
  * Ein rekursiver Ansatz ist besonders einfach.
  */
 void writeTree(Tree* codingTree) { // rekursiv
-    if(codingTree-> left && codingTree -> right){
-        output << false;
-        writeTree(codingTree -> left);
-        writeTree(codingTree -> right);
-    }
-    else{
-        output << true;
-        output << codingTree -> letter;
-    }
-    
-    }
+    /* TODO */
+}
 
 /*
  * Diese Methode ist der Startpunkt für Ihre Implementierung. Lesen Sie den

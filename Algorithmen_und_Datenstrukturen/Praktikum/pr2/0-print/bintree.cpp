@@ -29,7 +29,6 @@ std::ostream& operator<<(std::ostream& out, const Tree* T) {
     else
         return out << "(" << T->left << "," << T->key << "," << T->right << ")";
 }
-
 int main() {
     std::vector<Tree*> trees = {
         nullptr,

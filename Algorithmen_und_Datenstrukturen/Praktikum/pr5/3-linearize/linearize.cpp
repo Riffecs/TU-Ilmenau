@@ -1,4 +1,5 @@
 #include "dfs.h"
+#include <vector>
 
 /*****************************************************
 * Definition/Implementierung der Callback-Funktionen
@@ -6,10 +7,12 @@
 
 /* zusätzliche Variablen und Datenstrukturen */
 /* TODO */
+std::vector<int> stack;
 
 /* Aktionen direkt vor DFS() */
 void preDFS() {
     /* TODO */
+    stack.resize(0);
 }
 
 /* Präorder-Aktionen an Knoten v bei Entdeckung */
@@ -20,28 +23,19 @@ void dfsVisit(const int v) {
 /* Postorder-Aktionen an Knoten v bei Abschluss */
 void finVisit(const int v) {
     /* TODO */
+    stack.push_back(v);
 }
 
 /* Aktionen direkt nach DFS() */
 void postDFS() {
-    
-    if(B.size() == 0){
-    
-        std::vector<int> help;
-        help.resize(n);
-        for(int i = 0; i<n; i++ ){
-            help[fNum[i]] = i;
+    /* TODO */
+    if(!B.size()){
+        for(int i = stack.size()-1; 0 < i; --i){
+            std::cout <<stack[i] << " ";
         }
-        for(int i = n-1; i >= 0; --i){
-            std::cout << help[i];
-            if(i != 0){
-                std::cout << " ";
-            } 
-        }
+        std::cout << stack[0] << std::endl;
     }
-
     else{
-        std::cout << "-";
+        std::cout << "-" << std::endl;
     }
-    std::cout << std::endl;
 }

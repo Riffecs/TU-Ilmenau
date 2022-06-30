@@ -25,12 +25,12 @@ const std::vector<std::uint64_t> a = {
 };
 
 int linHash(const std::string& s) {
-    int64_t temp =  0;
-    for(int i = 0; i < s.size(); i++){
-        temp = a[i] * s[i] + temp;
+    /* TODO */
+    unsigned long long sum = 0;
+    for(int i = 0; i < s.size(); ++i){
+        sum += a[i] * s[i];
     }
-
-    return temp % p; 
+    return sum % p;
 }
 
 int main() {
@@ -39,17 +39,12 @@ int main() {
     table.resize(size,EMPTY);
     char c; std::string s;
     while(std::cin >> c >> s) {
-        switch (c)
-        {
-        case 'p':
-            std::cout<<table<<std::endl;
-            break;
-        case 'h':
-            std::cout<<"h("<<s<<") = "<<linHash(s)<<std::endl;
-            break;
-        default:
-            std::cout<<"Unknown command"<<std::endl;
-            break;
+        /* TODO */
+        if(c == 'h'){
+            std::cout << "h(" << s << ") = " << linHash(s) << std::endl;
+        }
+        if(c == 'p'){
+            std::cout << table << std::endl;
         }
     }
 }

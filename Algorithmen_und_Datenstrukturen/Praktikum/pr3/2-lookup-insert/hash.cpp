@@ -25,40 +25,47 @@ const std::vector<std::uint64_t> a = {
 };
 
 int linHash(const std::string& s) {
-    int64_t temp =  0;
-    for(int i = 0; i < s.size(); i++){
-        temp = a[i] * s[i] + temp;
+    /* TODO */
+    unsigned long long sum = 0;
+    for(int i = 0; i < s.size(); ++i){
+        sum += a[i] * s[i];
     }
-
-    return temp % p; 
+    return sum % p;
 }
 
 bool lookup(const std::string& s) {
-      int64_t pos =linHash(s) % table.size();
-      for(int i = 0; i < table.size(); i++){
-        if(table[(pos+i) % table.size()]  == EMPTY){
-            return false;
-        }
-        if(table[(pos+i) % table.size()] == s){
+    /* TODO */
+    int hash = linHash(s);
+    int size = table.size();
+    for(int i = 0; i < size; ++i){
+        int pos = (hash + i) % size;
+
+        if(table[pos] == s){
             return true;
         }
-        
+
+        if(table[pos] == EMPTY){
+            return false;
+        }        
     }
     return false;
 }
 
 void insert(const std::string& s) {
-    int64_t pos =linHash(s) % table.size();
-    for(int i = 0; i < table.size(); i++){
-        if(table[(pos+i) % table.size()]  == EMPTY){
-            table[(pos+i) % table.size()] = s; 
-            return;
+    /* TODO */
+    int hash = linHash(s);
+    int size = table.size();
+    
+    for(int i = 0; i < size; ++i){
+        int pos = (hash + i) % size;
+        if(table[pos] == s){
+            break;
         }
-        if(table[(pos+i) % table.size()] == s){
-            return;
+        if(table[pos] == EMPTY){
+            table[pos] = s;
+            break;
         }
     }
-
 }
 
 int main() {
@@ -67,23 +74,18 @@ int main() {
     table.resize(size,EMPTY);
     char c; std::string s;
     while(std::cin >> c >> s) {
-        switch (c)
-        {
-        case 'p':
-            std::cout<<table<<std::endl;
-            break;
-        case 'h':
-            std::cout<<"h("<<s<<") = "<<linHash(s)<<std::endl;
-            break;
-        case 'l':
-            std::cout<<lookup(s)<<std::endl;
-            break;
-        case 'i':
+        /* TODO */
+        if(c == 'h'){
+            std::cout << "h(" << s << ") = " << linHash(s) << std::endl;
+        }
+        if(c == 'p'){
+            std::cout << table << std::endl;
+        }
+        if(c == 'l'){
+            std::cout << lookup(s) << std::endl;
+        }
+        if(c == 'i'){
             insert(s);
-            break;
-        default:
-            std::cout<<"Unknown command"<<std::endl;
-            break;
         }
     }
 }

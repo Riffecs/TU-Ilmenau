@@ -5,13 +5,18 @@
 *****************************************************/
 
 /* zusätzliche Variablen und Datenstrukturen */
-std::vector<int> critical;
-int start;
+/* TODO */
+int max;
+std::vector<int> stack;
+std::vector<unsigned long long> costs;
 
 /* Aktionen direkt vor DFS() */
 void preDFS() {
-    critical.resize(n);
-    start = -1;
+    /* TODO */
+    max = 0;
+    stack.resize(0);
+    costs.resize(0);
+    costs.resize(n,{0});
 }
 
 /* Präorder-Aktionen an Knoten v bei Entdeckung */
@@ -21,50 +26,37 @@ void dfsVisit(const int v) {
 
 /* Postorder-Aktionen an Knoten v bei Abschluss */
 void finVisit(const int v) {
-    if(G[v].size() == 0){
-        critical[v] = 1;
-    }
-    else{
-        int temp = 0;
-        for(int i = 0; i<G[v].size(); i++ ){
-            if (critical[G[v][i]] > temp){
-                temp = critical[G[v][i]];
-            }
+    /* TODO */
+    stack.push_back(v);
+}
 
-            
+void rec_path(int node){
+    std::cout << " " << node;
+    for(int neighbour : G[node]){
+        if(costs[node] - 1 == costs[neighbour]){
+            rec_path(neighbour);
+            break;
         }
-        critical[v] = temp + 1;
-        
-    }
-    if(start != -1){
-        if(critical[v] > critical[start]){
-            start = v;
-        }
-    }
-    else{
-        start = v;
     }
 }
 
 /* Aktionen direkt nach DFS() */
 void postDFS() {
-    if(B.size() == 0){
-        int temp = start;
-        std::cout << critical[temp] << ":";
-        while(critical[temp] > 1){
-            std::cout << " " << temp;
-            for (int i = 0; i < G[temp].size(); i++){
-                if(critical[temp]-1 == critical[G[temp][i]]){
-                    temp = G[temp][i];
-                    break;
+    /* TODO */
+    if(!B.size()){
+        for (int node : stack){
+            for(int neighbour : G[node]){
+                if(costs[node] < costs[neighbour]){
+                    costs[node] = costs[neighbour];
                 }
             }
-            
+            if(++costs[node] > costs[max]){max = node;}
         }
-        std::cout << " " << temp;
+        std::cout << costs[max] << ":";
+        rec_path(max);
+        std::cout << std::endl;
     }
     else{
-        std::cout << "-";
+        std::cout << "-" << std::endl;
     }
-    std::cout << std::endl;
 }

@@ -5,34 +5,37 @@
 *****************************************************/
 
 /* zusätzliche Variablen und Datenstrukturen */
+/* TODO */
 int level;
-int treecount;
+int trees;
 
 /* Aktionen direkt vor DFS() */
 void preDFS() {
+    /* TODO */
     level = 0;
-    treecount = 0;
+    trees = 0;
 }
 
 /* Präorder-Aktionen an Knoten v bei Entdeckung */
 void dfsVisit(const int v) {
-    
-    ++level;
+    /* TODO */
+    if(!level++){++trees;}
     std::cout << v << "(";
 }
 
 /* Postorder-Aktionen an Knoten v bei Abschluss */
 void finVisit(const int v) {
-    --level;
-
-    std::cout << ")";
-    if(level == 0){
-        std::cout << " ";
-        treecount++;
+    /* TODO */
+    if (!--level){
+        std::cout << ")" << " ";
+    }
+    else{
+        std::cout << ")";
     }
 }
 
 /* Aktionen direkt nach DFS() */
 void postDFS() {
-    std::cout << ": " << treecount << std::endl;
+    /* TODO */
+    std::cout << ": " << trees << std::endl;
 }

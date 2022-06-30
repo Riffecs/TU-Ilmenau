@@ -17,11 +17,11 @@
                     "-D_GLIBCXX_DEBUG",
                     "${fileDirname}/${fileBasenameNoExtension}.cpp",
                     "-o",
-                    "${fileDirname}/${fileBasenameNoExtension}",
+                    "${fileDirname}/${fileBasenameNoExtension}"
                 ],
                 "problemMatcher": [
                     "$gcc"
-                ],
+                ]
             },
             "osx": {
                 "command": "/usr/bin/clang++",
@@ -30,11 +30,11 @@
                     "-g",
                     "${fileDirname}/${fileBasenameNoExtension}.cpp",
                     "-o",
-                    "${fileDirname}/${fileBasenameNoExtension}",
+                    "${fileDirname}/${fileBasenameNoExtension}"
                 ],
                 "problemMatcher": [
                     "$gcc"
-                ],
+                ]
             },
             "windows": {
                 "command": "cl.exe",
@@ -45,46 +45,51 @@
                     "/EHsc",
                     "/Fe:",
                     "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                    "${file}",
+                    "${file}"
                 ],
                 "problemMatcher": [
                     "$msCompile"
-                ],
-            },
+                ]
+            }
         },
-        // {
-        //     "label": "DIFF 0-sample.in",
-        //     "type": "shell",
-        //     "command": "diff",
-        //     "args": [
-        //         "${fileDirname}/0-sample.out",
-        //         "${fileDirname}/0-sample.ans",
-        //     ],
-        //     "windows": {
-        //         "command": "fc.exe",
-        //         "args": [
-        //             "/n",
-        //             "${fileDirname}\\0-sample.out",
-        //             "${fileDirname}\\0-sample.ans",
-        //         ],
-        //     },
-        // },
         {
             "label": "DIFF xyz.in",
             "type": "shell",
             "command": "cd \"${fileDirname}\"; \"./${fileBasenameNoExtension}\" < \"${input:pickInFile}.in\" > \"${input:pickInFile}.out\"; echo \"diff \\\"${input:pickInFile}.out\\\" \\\"${input:pickInFile}.ans\\\"\"; diff \"${input:pickInFile}.out\" \"${input:pickInFile}.ans\"; exit 0;",
             "windows": {
-                "command": ".vscode\\fcxyz.cmd \\\"${fileDirname}\\\" \\\"${fileBasenameNoExtension}\\\" \\\"${input:pickInFileWin}\\\"",
-            },
+                "command": ".vscode\\fcxyz.cmd \\\"${fileDirname}\\\" \\\"${fileBasenameNoExtension}\\\" \\\"${input:pickInFileWin}\\\""
+            }
         },
         {
             "label": "DIFF *.in",
             "type": "shell",
             "command": "cd \"${fileDirname}\"; for fullfilename in *.in; do filename=${fullfilename%.*}; \"./${fileBasenameNoExtension}\" < \"${filename}.in\" > \"${filename}.out\"; echo \"diff \\\"${filename}.out\\\" \\\"${filename}.ans\\\"\"; diff \"${filename}.out\" \"${filename}.ans\"; done; exit 0;",
             "windows": {
-                "command": "cmd /c \\\"@ECHO OFF && cd \"${fileDirname}\" && (for %f in (*.in) do \"${fileBasenameNoExtension}.exe\" < \"%~nf.in\" > \"%~nf.out\") && fc.exe /n *.out *.ans 2> nul || exit 0\\\"",
-            },
+                "command": "cmd /c \\\"@ECHO OFF && cd \"${fileDirname}\" && (for %f in (*.in) do \"${fileBasenameNoExtension}.exe\" < \"%~nf.in\" > \"%~nf.out\") && fc.exe /n *.out *.ans 2> nul || exit 0\\\""
+            }
         },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe Aktive Datei kompilieren",
+            "command": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compiler: \"C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe\""
+        }
     ],
     "inputs": [
         {

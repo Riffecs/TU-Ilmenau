@@ -13,20 +13,20 @@
  * einzulesende Bits existieren.
  */
 Tree* readTree() { // rekursiv
-    Tree* temptree = new Tree(nullptr, '-', nullptr);
-    bool b; input >> b;
-    
-    if(b==true){
-        char c; input >> c;
-        temptree -> letter = c;
-        
-    }   
+    /* TODO */
+    bool b;
+    char c;
+    input >> b;
+    Tree* T;
+    if(b){
+        input >> c;
+        T = new Tree(nullptr,c,nullptr);
+    }
     else{
-        temptree ->left =  readTree();
-        temptree ->right = readTree(); 
-    } 
-
-    return temptree;
+        T = new Tree(readTree(),'\000',readTree());
+    }
+    return T; 
+    
 }
 
 /*
@@ -50,23 +50,18 @@ Tree* readTree() { // rekursiv
  * deshalb nie verwenden.
  */
 char decodeChar(Tree* codingTree) { // rekursiv
-    if(codingTree->left && codingTree -> right){
-        bool b; input >> b;
-        if(b){
-        return decodeChar(codingTree->right); 
-        }
-        else{
-        return decodeChar(codingTree-> left);
-
-        }
+    /* TODO */
+    bool b;
+    if(codingTree->left == codingTree->right){
+        return codingTree->letter;
+    }
+    input >> b;
+    if(b){
+        decodeChar(codingTree->right);
     }
     else{
-        return codingTree -> letter; 
+        decodeChar(codingTree->left);
     }
-    
-
-
-
 }
 
 /*

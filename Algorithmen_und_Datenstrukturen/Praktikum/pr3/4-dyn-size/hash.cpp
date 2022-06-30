@@ -27,10 +27,29 @@ const std::vector<std::uint64_t> a = {
 
 int linHash(const std::string& s) {
     /* TODO */
+    unsigned long long sum = 0;
+    for(int i = 0; i < s.size(); ++i){
+        sum += a[i] * s[i];
+    }
+    return sum % p;
 }
 
 bool lookup(const std::string& s) {
     /* TODO */
+    int hash = linHash(s);
+    int size = table.size();
+    for(int i = 0; i < size; ++i){
+        int pos = (hash + i) % size;
+
+        if(table[pos] == s){
+            return true;
+        }
+
+        if(table[pos] == EMPTY){
+            return false;
+        }        
+    }
+    return false;
 }
 
 const double alpha0 = 0.7,
@@ -38,17 +57,100 @@ const double alpha0 = 0.7,
 int inUse = 0, load = 0;
 
 void insert(const std::string& s) {
-    /* TODO */
+    int size = table.size();
+    int hash = linHash(s);
+
+    if(!lookup(s)){
+
+        for(int i = 0; i < size; ++i){
+            int pos = (hash + i) % size;
+
+            if(table[pos] == EMPTY){
+                table[pos] = s;
+                ++ inUse;
+                ++ load;
+                break;
+            }
+            if(table[pos] == DELETED){
+                table[pos] = s;
+                ++ load;
+                break;
+            }
+        }
+    }
 }
 
 void _delete(const std::string& s) {
     /* TODO */
+    int hash = linHash(s);
+    int size = table.size();
+
+    for(int i = 0; i < size; ++i){
+        int pos = (hash + i) % size;
+
+        if (table[pos] == s){
+            table[pos] = DELETED;
+            -- load;
+        } 
+        
+        if(table[pos] == EMPTY){
+            break;
+        }
+    }
+
 }
 
+void resize(){
+    std::vector<std::string> old_table = table;
+    table.resize(table.size() *2,EMPTY);
+    load = 0;
+    inUse = 0;
+    for(int i = 0; i < old_table.size(); ++i){
+        if(old_table[i] != EMPTY && old_table[i] != DELETED){
+            insert(old_table[i]);
+        }
+    }
+}
+
+void reorganize(){
+    std::vector<std::string> old_table = table;
+    table.resize(table.size(),EMPTY);
+    load = 0;
+    inUse = 0;
+    for(int i = 0; i < old_table.size(); ++i){
+        if(old_table[i] != EMPTY && old_table[i] != DELETED){
+            insert(old_table[i]);
+        }
+    }
+}
 int main() {
     table.resize(2,EMPTY);
     char c; std::string s;
     while(std::cin >> c >> s) {
         /* TODO */
+        if(c == 'h'){
+            std::cout << "h(" << s << ") = " << linHash(s) << std::endl;
+        }
+        if(c == 'p'){
+            std::cout << table << std::endl;
+        }
+        if(c == 'l'){
+            std::cout << lookup(s) << std::endl;
+        }
+        if(c == 'i'){
+            //Teste auf möglichen Überlauf
+            if(inUse + 1 > alpha0 * table.size()){
+                if(load +1 > alpha1 * table.size()){
+                    resize();
+                }
+                else{
+                    reorganize();
+                }
+            }
+            insert(s);
+        }
+        if(c == 'd'){
+            _delete(s);
+        }
     }
 }

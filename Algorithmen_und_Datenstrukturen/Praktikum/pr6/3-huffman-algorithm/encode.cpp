@@ -1,4 +1,5 @@
 #include "encode.h"
+#include <algorithm>
 
 /*
  * Die nachfolgenden Variablen/Datenstrukturen könnten für Sie nützlich sein.
@@ -48,41 +49,35 @@ std::vector<bool> mark;             // Markierungs-Array: false = 0 = links, tru
  *     d.h., der in den Tabellen p/pred/mark am weitesten vorne/links steht.
  */
 void huffman() {
-    int i;
-    int j;
-
-    p.resize(2*n - 1);
-    pred.resize(2*n -2);
-    mark.resize(2*n -2);
+    /* TODO */
+    unsigned k,h,i,j;
+    p.resize(2 * n-1);
+    pred.resize(2 * n-2);
+    mark.resize(2 * n-2);
     pred[0] = n;
     pred[1] = n;
     mark[0] = 0;
     mark[1] = 1;
-    p[n] = p[0] + p[1];
-    int k = 2;
-    int h = n; 
-
-    for(int b = n+1; b < 2*n-1; b++){
-        if(k< n && p[k]<= p[h]){
-            i = k;
-            k++;
+    p[n] = p[0]+p[1];
+    k = 2;
+    h = n;
+    for(int b = n+1; b < 2*n-1; ++b){
+        if(k < n && p[k] <= p[h]){
+            i = k++;
         }
         else{
-            i = h;
-            h++;
+            i = h++;
         }
-        if(k<n && (h==b || p[k]<= p[h])){
-            j = k;
-            k++;
+        if(k < n && (h == b || p[k] <= p[h])){
+            j = k++;
         }
         else{
-            j = h;
-            h++;
+            j = h++;
         }
         pred[i] = b;
         pred[j] = b;
         mark[i] = 0;
-        mark[j] = 1; 
+        mark[j] = 1;
         p[b] = p[i] + p[j];
     }
 }
