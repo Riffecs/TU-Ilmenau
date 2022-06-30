@@ -1,12 +1,12 @@
 # Delta Regel - 2b
 
-# externe Links
+## externe Links
 -  [Delta Regel](https://www.tu-ilmenau.de/universitaet/fakultaeten/fakultaet-informatik-und-automatisierung/profil/institute-und-fachgebiete/institut-fuer-technische-informatik-und-ingenieurinformatik/fachgebiet-neuroinformatik-und-kognitive-robotik/lehre/lehrveranstaltungen/delta-regel-1)
 -  [Bedienungsanleitung](https://www.tu-ilmenau.de/universitaet/fakultaeten/fakultaet-informatik-und-automatisierung/profil/institute-und-fachgebiete/institut-fuer-technische-informatik-und-ingenieurinformatik/fachgebiet-neuroinformatik-und-kognitive-robotik/lehre/lehrveranstaltungen/delta-regel-1-1)
 -  [Aufgabenstellung](https://www.tu-ilmenau.de/universitaet/fakultaeten/fakultaet-informatik-und-automatisierung/profil/institute-und-fachgebiete/institut-fuer-technische-informatik-und-ingenieurinformatik/fachgebiet-neuroinformatik-und-kognitive-robotik/lehre/lehrveranstaltungen/delta-regel-1-1-1)
 
-# Installation
-## Vorraussetzungen
+## Installation
+### Vorraussetzungen
 - Für Windows: 
 ```PowerShell
 winget install -e --id Python.Python.3 -v 3.8.150.0
@@ -22,7 +22,7 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 pip install -U pip
 ```
-## pip und Python
+### pip und Python
 - Installieren des Packages:
  ```shell
  pip install tui-ni-practical-course --upgrade --extra-index-url https://2022ss:5-oQR6_193gHyy1yceHh@nikrgl.informatik.tu-ilmenau.de/api/v4/projects/1730/packages/pypi/simple
@@ -37,18 +37,18 @@ pip install -U pip
 tui-ni-delta-rule
  ```
 
-# Interface
+## Interface
 ![](/Neuroinformatik/Praktikum/2b_Delta-Regel/praktikum.png)
 
-## Lösung
-### Sigmoid 
-#### Output Function
+### Lösung
+#### Sigmoid 
+##### Output Function
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/sigmoid_output.py)
 ```python
 import numpy
 y = 1 / (1+ numpy.exp(-c*z))
 ```
-### Output Function Derivate
+#### Output Function Derivate
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/output_function_derivate.py)
 ```python
 dy_dz = c*y*(1-y)
