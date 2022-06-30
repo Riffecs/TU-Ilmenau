@@ -1,4 +1,4 @@
-Praktikum Neuroinformatik - 2b
+# Delta Regel - 2b
 
 # externe Links
 -  [Delta Regel](https://www.tu-ilmenau.de/universitaet/fakultaeten/fakultaet-informatik-und-automatisierung/profil/institute-und-fachgebiete/institut-fuer-technische-informatik-und-ingenieurinformatik/fachgebiet-neuroinformatik-und-kognitive-robotik/lehre/lehrveranstaltungen/delta-regel-1)
