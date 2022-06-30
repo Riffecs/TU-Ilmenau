@@ -1,0 +1,3 @@
+# Neuroinformaik
+
+- [Praktikum](/Neuroinformatik/Praktikum/) 
