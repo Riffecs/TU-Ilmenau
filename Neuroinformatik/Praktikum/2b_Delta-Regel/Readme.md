@@ -10,26 +10,26 @@
 ## Interface
 ![](/Neuroinformatik/Praktikum/2b_Delta-Regel/praktikum.png)
 
-### Lösung
-#### Sigmoid 
-##### Output Function
+## Lösung
+### Sigmoid 
+#### Output Function
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/sigmoid_output.py)
 ```python
 import numpy
 y = 1 / (1+ numpy.exp(-c*z))
 ```
-#### Output Function Derivate
+### Output Function Derivate
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/sigmoid_output_function_derivate.py)
 ```python
 dy_dz = c*y*(1-y)
 ```
-#### RelU  
-##### RelU Output Function
+### RelU  
+#### RelU Output Function
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/rel_output_function.py)
 ```python
 y = max(0,z)
 ```
-#### RelU Output Function Derivate
+### RelU Output Function Derivate
 [Source Code](/Neuroinformatik/Praktikum/2b_Delta-Regel/rel_output_function_derivate.py)
 ```python
 if z < 0:
