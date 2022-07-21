@@ -22,6 +22,8 @@ const (
 	GE  Comparison = ">="
 )
 
+const HashTableSize = 10000
+
 /*
 	The supported compression types of the Column Store.
 */
@@ -67,8 +69,15 @@ type Column struct {
 	of the columns.
 */
 type Relation struct {
-	Name    string
-	Columns []Column
+	Name   string
+	Header []AttrInfo
+	Data   []Tuple
+	Map    map[string][]int
+}
+
+type Tuple struct {
+	header  *[]AttrInfo
+	entries *[]interface{}
 }
 
 /*
@@ -80,12 +89,15 @@ type Relationer interface {
 		Loads a .csv file into a relation. The name of the relation corresponds to the name of the given file.
 		A given seperator is used to delimit the columns.
 	*/
-	Load(csvFile string, separator rune) error
-	Scan(colList []AttrInfo) Relationer
-	Select(col AttrInfo, comp Comparison, compVal interface{}) (Relationer, error)
+	Load(csvFile string, separator rune) (Relationer, error)
+	//Scan(colList []AttrInfo) Relationer
+	Select(col AttrInfo, comp Comparison, compVal interface{}) Relationer
 	Print()
 	GetRawData() interface{}
 	Size() int
+	//MakeIndex()
+	//IndexScan(string) Relationer
+	//IndexNestedLoop(relation *Relationer) Relationer
 }
 
 /*
@@ -109,4 +121,7 @@ type ColumnStorer interface {
 		Returns a relation by name.
 	*/
 	GetRelation(relName string) Relationer
+
+	MakeIndex(relName string)
+	IndexScan(relName string, colList []AttrInfo)
 }
